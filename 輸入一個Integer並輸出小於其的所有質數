@@ -1,0 +1,35 @@
+import java.util.Scanner;  
+import java.util.Vector;  
+public class Main {  
+  
+    public static void main(String[] args) {  
+    // write your code here  
+        int number;  
+        Scanner cin=new Scanner(System.in);  
+        number=cin.nextInt();  
+        Vector v=new Vector();  
+        if(number>=2)  
+        {  
+            v.add(2);  
+            for(int i=2;i<number;++i)  
+            {  
+                for(int j=2;j<i;++j)  
+                {  
+                    if(i%j==0)  
+                    {  
+                        break;  
+                    }  
+                    else if(i==j+1)  
+                    {  
+                        v.add(i);  
+                    }  
+                }  
+            }  
+            for(int k=0;k<v.size()-1;k++)  
+            {  
+                System.out.print(v.get(k)+" ");  
+            }  
+            System.out.println(v.lastElement());  
+        }  
+    }  
+}  
