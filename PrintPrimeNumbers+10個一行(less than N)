@@ -1,0 +1,43 @@
+import java.util.Scanner;    
+import java.util.Vector;    
+public class Main {    
+    
+    public static void main(String[] args) {    
+        // write your code here    
+        int number;    
+        Scanner scanner=new Scanner(System.in);    
+        number=scanner.nextInt();    
+        Vector v=new Vector();    
+        if(number>=2)    
+        {    
+                v.add(2);    
+            for(int i=2;i<number;i++)    
+            {    
+                for(int j=2;j<i;j++)    
+                {    
+                    if(i%j==0)    
+                    {    
+                        break;    
+                    }    
+                    else if(i==j+1)    
+                    {    
+                            v.add(i);    
+                    }    
+                }    
+            }    
+        }    
+        System.out.print(v.firstElement()+" ");    
+        for(int k=1;k<v.size()-1;k++)    
+        {    
+            if(k%10!=9)    
+            {    
+                System.out.print(v.get(k) + " ");    
+            }    
+            else    
+            {    
+                System.out.println(v.get(k));    
+            }    
+        }    
+        System.out.println(v.lastElement());    
+    }    
+} 
