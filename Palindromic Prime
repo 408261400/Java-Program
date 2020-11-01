@@ -1,0 +1,70 @@
+import java.util.Scanner;    
+import java.util.Vector;    
+    
+public class Main {    
+    
+    public static void main(String[] args) {     
+        int number;    
+        Scanner cin = new Scanner(System.in);    
+        Vector v = new Vector();    
+        while (cin.hasNextInt()) {    
+            number = cin.nextInt();    
+            v.add(2);    
+            v.add(3);    
+            v.add(5);    
+            v.add(7);    
+            v.add(11);    
+            if (number <= 5) {    
+                if (number == 0) {    
+                    System.out.println();    
+                }    
+                else {    
+                    for (int i = 0; i < number - 1; i++) {    
+                        System.out.print(v.get(i) + " ");    
+                    }    
+                    System.out.println(v.get(number - 1));    
+                }    
+            }    
+            else {    
+                String str;    
+                for (int i = 101; i < 100000; i++) {    
+                    for (int j = 2; j < i; j++) {    
+                        if (i % j == 0) {    
+                            break;    
+                        }    
+                        else if (i == j + 1) {    
+                            str = "" + i;    
+                            StringBuffer b = new StringBuffer(str);    
+                            b.reverse();    
+                            b.toString();    
+                            int count;    
+                            count = 0;    
+                            for (int k = 0; k < b.length(); k++) {    
+                                if (b.charAt(k) - 48 == str.charAt(k) - 48) {    
+                                    count++;    
+                                }    
+                            }    
+                            if (count == b.length()) {    
+                                v.add(i);    
+                            }    
+                        }    
+                    }    
+                    if (v.size() == number) {    
+                        break;    
+                    }    
+                }    
+                System.out.print(v.firstElement() + " ");    
+                for (int k = 1; k < v.size() - 1; k++) {    
+                    if (k % 10 != 9) {    
+                        System.out.print(v.get(k) + " ");    
+                    }    
+                    else {    
+                        System.out.println(v.get(k));    
+                    }    
+                }    
+                System.out.println(v.lastElement());    
+            }    
+            v.clear();    
+        }    
+    }    
+}
