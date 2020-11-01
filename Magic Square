@@ -1,0 +1,51 @@
+import java.util.Scanner;  
+public class Main {  
+  
+    public static void main(String[] args) {  
+        int N, i, j;  
+        int row, column, sum, temp;  
+        Scanner cin = new Scanner(System.in);  
+        temp = 1;  
+        while (cin.hasNextInt()) {  
+            N = cin.nextInt();  
+            int[][] v = new int[N][N];  
+            if (temp == 0) {  
+                System.out.println();  
+            }  
+            if (N % 2 == 0) {  
+                System.out.println("It is not an odd number.");  
+            }   
+            else {  
+                sum = (1 + N * N) * N / 2;  
+                System.out.println(sum);  
+                for (i = 0; i < N; ++i) {  
+                    for (j = 0; j < N; ++j) {  
+                        v[i][j] = 0;  
+                    }  
+                }  
+                v[N - 1][(N - 1) / 2] = 1;  
+                i = N - 1;  
+                j = (N - 1) / 2;  
+                for (int count = 2; count <= N * N; ++count) {  
+                    row = (i + 1) % N;  
+                    column = (j + 1) % N;  
+                    if (v[row][column] > 0) {  
+                        row = (i--) % N;  
+                    }   
+                    else {  
+                        i = row;  
+                        j = column;  
+                    }  
+                    v[i][j] = count;  
+                }  
+                for (i = 0; i < N; ++i) {  
+                    for (j = 0; j < N; ++j) {  
+                        System.out.printf("%5d", v[i][j]);  
+                    }  
+                    System.out.println();  
+                }  
+            }  
+            temp = 0;  
+        }  
+    }  
+}  
