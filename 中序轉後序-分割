@@ -1,0 +1,61 @@
+import java.util.*;  
+  
+public class Main {  
+  
+    public static void main(String[] args) {  
+        String str;  
+        Scanner cin = new Scanner(System.in);  
+        str = cin.next();  
+        StringTokenizer st1 = new StringTokenizer(str, "+-*/()%");  
+        String[] array = new String[str.length()];  
+        int i, temp;  
+        double start, ans;  
+        i = 0;  
+        ans = 0;  
+        while (st1.hasMoreTokens()) {  
+            array[i] = st1.nextToken();  
+            start = Double.parseDouble(array[i]);  
+            ans = ans + start;  
+            i++;  
+        }  
+        temp = i;  
+        for (int j = 0; j < str.length(); j++) {  
+            if (str.charAt(j) == '*' || str.charAt(j) == '/' || str.charAt(j) == '+' || str.charAt(j) == '-') {  
+                if (str.charAt(j) == '*') {  
+                    array[i] = "*";  
+                }  
+                if (str.charAt(j) == '/') {  
+                    array[i] = "/";  
+                }  
+                if (str.charAt(j) == '+') {  
+                    array[i] = "+";  
+                }  
+                if (str.charAt(j) == '-') {  
+                    array[i] = "-";  
+                }  
+                i++;  
+            }   
+            else if (str.charAt(j) == '(' || str.charAt(j) == ')' || str.charAt(j) == '%') {  
+                if (str.charAt(j) == '(') {  
+                    array[i] = "(";  
+                }  
+                if (str.charAt(j) == ')') {  
+                    array[i] = ")";  
+                }  
+                if (str.charAt(j) == '%') {  
+                    array[i] = "%";  
+                }  
+                i++;  
+            }  
+        }  
+        for (int k = 0; k < temp - 1; k++) {  
+            System.out.print(array[k] + " ");  
+        }  
+        System.out.println(array[temp - 1]);  
+        for (int k = temp; k < i - 1; k++) {  
+            System.out.print(array[k] + " ");  
+        }  
+        System.out.println(array[i - 1]);  
+        System.out.printf("%.3f\n", ans);  
+    }  
+}
