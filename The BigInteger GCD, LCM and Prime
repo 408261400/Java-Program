@@ -1,0 +1,30 @@
+import java.math.BigInteger;  
+import java.util.Scanner;  
+import java.util.Vector;  
+public class Main {  
+  
+    public static void main(String[] args) {  
+        Scanner cin = new Scanner(System.in);  
+        Vector v = new Vector();  
+        while (cin.hasNextBigInteger()) {  
+            BigInteger M = cin.nextBigInteger();  
+            BigInteger N = cin.nextBigInteger();  
+            BigInteger LCM = M.multiply(N).divide(M.gcd(N));  
+            System.out.println(M.gcd(N) + " " + LCM);  
+            BigInteger one = new BigInteger("1");  
+            BigInteger num = new BigInteger("5");  
+            BigInteger temp = new BigInteger("0");  
+            while (temp.compareTo(num) < 0) {  
+                BigInteger prime = LCM.nextProbablePrime();  
+                v.add(prime);  
+                LCM = prime.add(one);  
+                temp = temp.add(one);  
+            }  
+            for (int i = 0; i < v.size() - 1; i++) {  
+                System.out.print(v.get(i) + " ");  
+            }  
+            System.out.println(v.lastElement());  
+            v.clear();  
+        }  
+    }  
+}
