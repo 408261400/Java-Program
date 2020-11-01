@@ -1,0 +1,99 @@
+import java.util.Scanner;  
+  
+public class Main {  
+  
+    public static void main(String[] args) {  
+        int number,temp,count;  
+        Scanner cin = new Scanner(System.in);  
+        count = 1;  
+        while(cin.hasNextInt()) {  
+            temp = 1;  
+            number = cin.nextInt();  
+            if (number == -1) {  
+                break;  
+            }   
+            else {  
+                if (count == 0) {  
+                    System.out.println();  
+                }  
+                String[][] v = new String[number][number];  
+                String[] b = new String[number];  
+                for (int i = 0; i < number; i++) {  
+                    for (int j = 0; j < v[0].length; j++) {  
+                        v[i][j] = cin.next();  
+                    }  
+                }  
+                int k;  
+                k = 0;  
+                while (k < number - 1) {  
+                    for (int i = k + 1; i < number; i++) {  
+                        for (int j = 0; j < v[0].length; j++) {  
+                            if (v[k][j].equals(v[i][j])) {  
+                                temp = 0;  
+                                break;  
+                            }  
+                        }  
+                        if (temp == 0) {  
+                            break;  
+                        }  
+                    }  
+                    k++;  
+                }  
+                k = 0;  
+                while (k < number - 1) {  
+                    for (int i = k + 1; i < number; i++) {  
+                        for (int j = 0; j < v[0].length; j++) {  
+                            if (v[j][k].equals(v[j][i])) {  
+                                temp = 0;  
+                                break;  
+                            }  
+                        }  
+                        if (temp == 0) {  
+                            break;  
+                        }  
+                    }  
+                    if (temp == 0) {  
+                        break;  
+                    }  
+                    k++;  
+                }  
+                if (temp != 0) {  
+                    for (int j = 0; j < number; j++) {  
+                        b[j] = v[j][0];  
+                    }  
+                    k = 1;  
+                    while (k < number) {  
+                        for (int j = 0; j < number; j++) {  
+                            temp = 0;  
+                            for (int m = 0; m < b.length; m++) {  
+                                if (v[j][k].equals(b[m])) {  
+                                    temp = 1;  
+                                    break;  
+                                }  
+                                if (m == b.length - 1) {  
+                                    if (temp == 0) {  
+                                        break;  
+                                    }  
+                                }  
+                            }  
+                            if (temp == 0) {  
+                                break;  
+                            }  
+                        }  
+                        if (temp == 0) {  
+                            break;  
+                        }  
+                        k++;  
+                    }  
+                }  
+                if (temp == 0) {  
+                    System.out.println("The input array is not a Latin square");  
+                }  
+                if (temp == 1) {  
+                    System.out.println("The input array is a Latin square");  
+                }  
+                count = 0;  
+            }  
+        }  
+    }  
+}
