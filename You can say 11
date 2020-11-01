@@ -1,0 +1,33 @@
+import java.util.Scanner;  
+  
+public class Main {  
+  
+    public static void main(String[] args) {  
+        String number;  
+        int ans,temp;  
+        Scanner cin = new Scanner(System.in);  
+        while(cin.hasNext()) {  
+            ans = 0;  
+            temp = 0;  
+            number = cin.next();  
+            if (number.charAt(0) - 48 == 0) {  
+                break;  
+            }   
+            else {  
+                for (int i = number.length() - 1; i >= 0; i = i - 2) {  
+                    ans = ans + number.charAt(i) - 48;  
+                }  
+                for (int i = number.length() - 2; i >= 0; i = i - 2) {  
+                    temp = temp + number.charAt(i) - 48;  
+                }  
+                System.out.println(ans + " " + temp);  
+                if ((ans - temp) % 11 == 0) {  
+                    System.out.println(number + " is a multiple of 11.");  
+                }   
+                else {  
+                    System.out.println(number + " is not a multiple of 11.");  
+                }  
+            }  
+        }  
+    }  
+}
