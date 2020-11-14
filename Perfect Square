@@ -1,0 +1,41 @@
+import java.util.Scanner;
+
+public class Main {
+
+    public static void main(String[] args) {
+        Scanner cin = new Scanner(System.in);
+        int number, num;
+        while (cin.hasNext()) {
+            number = cin.nextInt();
+            num = number;
+            int[] b = new int[number];
+            int temp, start, ans;
+            temp = 0;
+            start = 0;
+            ans = 1;
+            for (int i = 2; i < num; i++) {
+                if (number % i == 0) {
+                    while (number % i == 0) {
+                        temp++;
+                        b[start] = i;
+                        number = number / i;
+                    }
+                    if (temp > 1) {
+                        b[start] = 0;
+                        temp = 0;
+                    }
+                    else {
+                        temp = 0;
+                    }
+                    start++;
+                }
+            }
+            for (int i = 0; i < start; i++) {
+                if (b[i] != 0) {
+                    ans = ans * b[i];
+                }
+            }
+            System.out.println(ans + " " + ans * num);
+        }
+    }
+}
