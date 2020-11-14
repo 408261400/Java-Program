@@ -1,0 +1,82 @@
+import java.util.*;  
+  
+public class Main {  
+  
+    public static void main(String[] args) {  
+        String str;  
+        Scanner cin = new Scanner(System.in);  
+        str = cin.next();  
+        StringTokenizer st1 = new StringTokenizer(str, "+-*/()%", true);  
+        String[] array = new String[1000];  
+        Stack<String> st = new Stack<String>();  
+        int i;  
+        i = 0;  
+        while (st1.hasMoreTokens()) {  
+            array[i] = st1.nextToken();  
+            i++;  
+        }  
+        for (int k = 0; k < i; k++) {  
+            if (array[k].equals("*") || array[k].equals("/") || array[k].equals("%") || array[k].equals("(")) {  
+                if (!st.empty()) {  
+                    if (array[k].equals("(")) {  
+                        st.push(array[k]);  
+                    }  
+                    if (array[k].equals("*") || array[k].equals("/") || array[k].equals("%")) {  
+                        if (st.peek().equals("*") || st.peek().equals("/") || st.peek().equals("%")) {  
+                            System.out.print(st.pop() + " ");  
+                            st.push(array[k]);  
+                        }  
+                        else if (st.peek().equals("+") || st.peek().equals("-") || st.peek().equals("(")) {  
+                            st.push(array[k]);  
+                        }  
+                    }  
+                }  
+                else {  
+                    st.push(array[k]);  
+                }  
+            }  
+            else if (array[k].equals("+") || array[k].equals("-")) {  
+                if (!st.empty()) {  
+                    if (st.peek().equals("+") || st.peek().equals("-")) {  
+                        System.out.print(st.pop() + " ");  
+                        st.push(array[k]);  
+                    }  
+                    else if (st.peek().equals("(")) {  
+                        st.push(array[k]);  
+                    }  
+                    else if (st.peek().equals("*") || st.peek().equals("/") || st.peek().equals("%")) {  
+                        while (!st.empty()) {  
+                            if (!st.peek().equals("(")) {  
+                                System.out.print(st.pop() + " ");  
+                            }  
+                            else{  
+                                break;  
+                            }  
+                        }  
+                        st.push(array[k]);  
+                    }  
+                }  
+                else {  
+                    st.push(array[k]);  
+                }  
+            }  
+            else if (array[k].equals(")")) {  
+                while (!st.peek().equals("(")) {  
+                    System.out.print(st.pop() + " ");  
+                }  
+                if (st.peek().equals("(")) {  
+                    st.pop();  
+                }  
+            }  
+            else {  
+                System.out.print(array[k] + " ");  
+            }  
+            if (k == i - 1) {  
+                while (!st.empty()) {  
+                    System.out.print(st.pop() + " ");  
+                }  
+            }  
+        }  
+        System.out.println();  
+    }  
+}
