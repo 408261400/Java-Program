@@ -1,0 +1,26 @@
+import java.util.*;  
+import java.lang.*;  
+  
+public class Main {  
+  
+    public static void main(String[] args) {  
+        String str, str1, str2;  
+        int time;  
+        Scanner cin = new Scanner(System.in);  
+        Vector v = new Vector();  
+        time = cin.nextInt();  
+        cin.nextLine();  
+        for (int k = 0; k < time; k++) {  
+            str = cin.nextLine();  
+            str1 = cin.nextLine();  
+            str2 = cin.nextLine();  
+            str = str.replaceAll(str1, str2);  
+            StringBuffer sb = new StringBuffer(str);  
+            sb.reverse();  
+            v.add(sb);  
+        }  
+        for (int i = 0; i < v.size(); i++) {  
+            System.out.println(v.get(i));  
+        }  
+    }  
+}  
