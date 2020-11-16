@@ -1,0 +1,85 @@
+import java.lang.Math;
+import java.awt.geom.Point2D;
+import java.util.Scanner;
+
+class Triangle {
+    Point2D A;
+    Point2D B;
+    Point2D C;
+    public static void Area(Double x1,Double y1,Double x2,Double y2,Double x3,Double y3) {
+        double A,temp;
+        double a = Point2D.distance(x1,y1,x2,y2);
+        double b = Point2D.distance(x2,y2,x3,y3);
+        double c = Point2D.distance(x1,y1,x3,y3);
+        double s;
+        s = (a+b+c) / 2;
+        temp = s*(s-a)*(s-b)*(s-c);
+        A = Math.pow(temp,0.5);
+        System.out.printf("%.3f\n",A);
+    }
+}
+class point {
+    public static void distance(Double x1,Double y1,Double x2,Double y2,Double x3,Double y3) {
+        double a = Point2D.distance(x1, y1, x2, y2);
+        double b = Point2D.distance(x2, y2, x3, y3);
+        double c = Point2D.distance(x1, y1, x3, y3);
+        double sc;
+        sc = a + b + c;
+        double max = a;
+        double min = a;
+        if (b > max && b > c) {
+            max = b;
+            if (c > min) {
+                min = a;
+            } else if (c < min) {
+                min = c;
+            }
+        }
+        if (c > max && c > b) {
+            max = c;
+            if (b > min) {
+                min = a;
+            } else {
+                min = b;
+            }
+        }
+        if (b < max && c < max) {
+            max = a;
+            if (b < c) {
+                min = b;
+            } else if (b > c) {
+                min = c;
+            }
+        }
+        if (max < sc - max) {
+            System.out.printf("%.3f %.3f %.3f ", min, sc - max - min, max);
+            Triangle.Area(x1, y1, x2, y2, x3, y3);
+        }
+        else {
+            System.out.println("Just Line!");
+        }
+    }
+}
+
+public class Main {
+
+    public static void main(String[] args) {
+        int time;
+        double x1, x2, x3, y1, y2, y3;
+        Scanner cin = new Scanner(System.in);
+        time = cin.nextInt();
+        for (int i = 0; i < time; i++) {
+            x1 = cin.nextDouble();
+            y1 = cin.nextDouble();
+            x2 = cin.nextDouble();
+            y2 = cin.nextDouble();
+            x3 = cin.nextDouble();
+            y3 = cin.nextDouble();
+            Triangle tr = new Triangle();
+            tr.A = new Point2D.Double(x1, y1);
+            tr.B = new Point2D.Double(x2, y2);
+            tr.C = new Point2D.Double(x3, y3);
+            point.distance(x1, y1, x2, y2, x3, y3);
+        }
+    }
+}
