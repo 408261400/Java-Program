@@ -1,0 +1,209 @@
+import java.math.BigDecimal;
+import java.util.Scanner;
+import java.util.StringTokenizer;
+
+public class Main {
+
+    public static void main(String[] args) {
+        String str;
+        Scanner cin = new Scanner(System.in);
+        while (cin.hasNext()) {
+            str = cin.nextLine();
+            StringTokenizer st1 = new StringTokenizer(str, "+-*/% ");
+            StringTokenizer st2 = new StringTokenizer(str, "0123456789. ");
+            String[] array = new String[1000];
+            String[] array2 = new String[1000];
+            BigDecimal[] array1 = new BigDecimal[1000];
+            int i = 0;
+            while (st1.hasMoreTokens()) {
+                array[i] = st1.nextToken();
+                i++;
+            }
+            int temp = 0;
+            while (st2.hasMoreTokens()) {
+                array2[temp] = st2.nextToken();
+                temp++;
+            }
+            for (int k = 0; k < i; k++) {
+                BigDecimal b = new BigDecimal(array[k]);
+                array1[k] = b;
+            }
+            BigDecimal num = null;
+            if (i == 1) {
+                if (str.charAt(0) == '-') {
+                    System.out.print("-");
+                }
+                System.out.printf("%.1f\n", array1[0]);
+            }
+            if (i == 2) {
+                System.out.printf("%.1f", array1[0]);
+                if (array2[0].equals("+")) {
+                    num = array1[0].add(array1[1]);
+                    System.out.print(" + ");
+                }
+                if (array2[0].equals("-")) {
+                    num = array1[0].subtract(array1[1]);
+                    System.out.print(" - ");
+                }
+                if (array2[0].equals("*")) {
+                    num = array1[0].multiply(array1[1]);
+                    System.out.print(" * ");
+                }
+                if (array2[0].equals("/")) {
+                    num = array1[0].divide(array1[1]);
+                    System.out.print(" / ");
+                }
+                if (array2[0].equals("%")) {
+                    num = array1[0].remainder(array1[1]);
+                    System.out.print(" % ");
+                }
+                System.out.printf("%.1f = %.1f\n", array1[1], num);
+            }
+            if (i == 3) {
+                System.out.printf("%.1f", array1[0]);
+                if (array2[1].equals("*")) {
+                    if (array2[0].equals("+") || array2[0].equals("-")) {
+                        num = array1[1].multiply(array1[2]);
+                        if (array2[0].equals("+")) {
+                            num = array1[0].add(num);
+                            System.out.print(" + ");
+                        }
+                        if (array2[0].equals("-")) {
+                            num = array1[0].subtract(num);
+                            System.out.print(" - ");
+                        }
+                    } else {
+                        if (array2[0].equals("*")) {
+                            num = array1[0].multiply(array1[1]);
+                            System.out.print(" * ");
+                        }
+                        if (array2[0].equals("/")) {
+                            num = array1[0].divide(array1[1]);
+                            System.out.print(" / ");
+                        }
+                        if (array2[0].equals("%")) {
+                            num = array1[0].remainder(array1[1]);
+                            System.out.print(" % ");
+                        }
+                        num = num.multiply(array1[2]);
+                    }
+                    System.out.printf("%.1f", array1[1]);
+                    System.out.print(" * ");
+                    System.out.printf("%.1f = %.1f\n", array1[2], num);
+                }
+                if (array2[1].equals("/")) {
+                    if (array2[0].equals("+")) {
+                        num = array1[1].divide(array1[2]);
+                        num = array1[0].add(num);
+                        System.out.print(" + ");
+                    }
+                    if (array2[0].equals("-")) {
+                        num = array1[1].divide(array1[2]);
+                        num = array1[0].subtract(num);
+                        System.out.print(" - ");
+                    }
+                    if (array2[0].equals("*")) {
+                        num = array1[0].multiply(array1[1]);
+                        num = num.divide(array1[2]);
+                        System.out.print(" * ");
+                    }
+                    if (array2[0].equals("/")) {
+                        num = array1[0].divide(array1[1]);
+                        num = num.divide(array1[2]);
+                        System.out.print(" / ");
+                    }
+                    if (array2[0].equals("%")) {
+                        num = array1[0].remainder(array1[1]);
+                        num = num.divide(array1[2]);
+                        System.out.print(" % ");
+                    }
+                    System.out.printf("%.1f", array1[1]);
+                    System.out.print(" / ");
+                    System.out.printf("%.1f = %.1f\n", array1[2], num);
+                }
+                if (array2[1].equals("%")) {
+                    if (array2[0].equals("+")) {
+                        num = array1[1].remainder(array1[2]);
+                        num = array1[0].add(num);
+                        System.out.print(" + ");
+                    }
+                    if (array2[0].equals("-")) {
+                        num = array1[1].remainder(array1[2]);
+                        num = array1[0].subtract(num);
+                        System.out.print(" - ");
+                    }
+                    if (array2[0].equals("*")) {
+                        num = array1[0].multiply(array1[1]);
+                        num = num.remainder(array1[2]);
+                        System.out.print(" * ");
+                    }
+                    if (array2[0].equals("/")) {
+                        num = array1[0].divide(array1[1]);
+                        num = num.remainder(array1[2]);
+                        System.out.print(" / ");
+                    }
+                    if (array2[0].equals("%")) {
+                        num = array1[0].remainder(array1[1]);
+                        num = num.remainder(array1[2]);
+                        System.out.print(" % ");
+                    }
+                    System.out.printf("%.1f", array1[1]);
+                    System.out.print(" % ");
+                    System.out.printf("%.1f = %.1f\n", array1[2], num);
+                }
+                if (array2[1].equals("+")) {
+                    if (array2[0].equals("+")) {
+                        num = array1[0].add(array1[1]);
+                        System.out.print(" + ");
+                    }
+                    if (array2[0].equals("-")) {
+                        num = array1[0].subtract(array1[1]);
+                        System.out.print(" - ");
+                    }
+                    if (array2[0].equals("*")) {
+                        num = array1[0].multiply(array1[1]);
+                        System.out.print(" * ");
+                    }
+                    if (array2[0].equals("/")) {
+                        num = array1[0].divide(array1[1]);
+                        System.out.print(" / ");
+                    }
+                    if (array2[0].equals("%")) {
+                        num = array1[0].remainder(array1[1]);
+                        System.out.print(" % ");
+                    }
+                    num = num.add(array1[2]);
+                    System.out.printf("%.1f", array1[1]);
+                    System.out.print(" + ");
+                    System.out.printf("%.1f = %.1f\n", array1[2], num);
+                }
+                if (array2[1].equals("-")) {
+                    if (array2[0].equals("+")) {
+                        num = array1[0].add(array1[1]);
+                        System.out.print(" + ");
+                    }
+                    if (array2[0].equals("-")) {
+                        num = array1[0].subtract(array1[1]);
+                        System.out.print(" - ");
+                    }
+                    if (array2[0].equals("*")) {
+                        num = array1[0].multiply(array1[1]);
+                        System.out.print(" * ");
+                    }
+                    if (array2[0].equals("/")) {
+                        num = array1[0].divide(array1[1]);
+                        System.out.print(" / ");
+                    }
+                    if (array2[0].equals("%")) {
+                        num = array1[0].remainder(array1[1]);
+                        System.out.print(" % ");
+                    }
+                    num = num.subtract(array1[2]);
+                    System.out.printf("%.1f", array1[1]);
+                    System.out.print(" - ");
+                    System.out.printf("%.1f = %.1f\n", array1[2], num);
+                }
+            }
+        }
+    }
+}
