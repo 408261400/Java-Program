@@ -1,0 +1,145 @@
+import java.math.BigDecimal;
+import java.util.*;
+
+class exp {
+    public static String[] expressionFunction(String str) {
+        String[] expression = new String[1000];
+        StringTokenizer st1 = new StringTokenizer(str, "+-*/()%", true);
+        int i = 0;
+        while (st1.hasMoreTokens()) {
+            expression[i] = st1.nextToken();
+            i++;
+        }
+        String[] express = new String[i];
+        for (int j = 0; j < i; j++) {
+            express[j] = expression[j];
+        }
+        return express;
+    }
+
+    public static String[] PostfixExpression(String str) {
+        String[] array = expressionFunction(str);
+        String[] Postfix = new String[array.length];
+        Stack<String> st = new Stack<String>();
+        int temp;
+        temp = 0;
+        for (int k = 0; k < array.length; k++) {
+            if (array[k].equals("*") || array[k].equals("/") || array[k].equals("%") || array[k].equals("(")) {
+                if (!st.empty()) {
+                    if (array[k].equals("(")) {
+                        st.push(array[k]);
+                    }
+                    if (array[k].equals("*") || array[k].equals("/") || array[k].equals("%")) {
+                        if (st.peek().equals("*") || st.peek().equals("/") || st.peek().equals("%")) {
+                            Postfix[temp] = st.pop();
+                            st.push(array[k]);
+                            temp++;
+                        } else if (st.peek().equals("+") || st.peek().equals("-") || st.peek().equals("(")) {
+                            st.push(array[k]);
+                        }
+                    }
+                } else {
+                    st.push(array[k]);
+                }
+            } else if (array[k].equals("+") || array[k].equals("-")) {
+                if (!st.empty()) {
+                    if (st.peek().equals("+") || st.peek().equals("-")) {
+                        Postfix[temp] = st.pop();
+                        st.push(array[k]);
+                        temp++;
+                    } else if (st.peek().equals("(")) {
+                        st.push(array[k]);
+                    } else if (st.peek().equals("*") || st.peek().equals("/") || st.peek().equals("%")) {
+                        while (!st.empty()) {
+                            if (!st.peek().equals("(")) {
+                                Postfix[temp] = st.pop();
+                                temp++;
+                            } else {
+                                break;
+                            }
+                        }
+                        st.push(array[k]);
+                    }
+                } else {
+                    st.push(array[k]);
+                }
+            } else if (array[k].equals(")")) {
+                while (!st.peek().equals("(")) {
+                    Postfix[temp] = st.pop();
+                    temp++;
+                }
+                if (st.peek().equals("(")) {
+                    st.pop();
+                }
+            } else {
+                Postfix[temp] = array[k];
+                temp++;
+            }
+            if (k == array.length - 1) {
+                while (!st.empty()) {
+                    Postfix[temp] = st.pop();
+                    temp++;
+                }
+            }
+        }
+        String[] Postfix1 = new String[temp];
+        for (int j = 0; j < temp; j++) {
+            Postfix1[j] = Postfix[j];
+        }
+        return Postfix1;
+    }
+
+    public static BigDecimal resultExpression(String str) {
+        BigDecimal result = null;
+        String[] array1 = PostfixExpression(str);
+        Stack<BigDecimal> st1 = new Stack<BigDecimal>();
+        for (int k = 0; k < array1.length; k++) {
+            if (array1[k].equals("+") || array1[k].equals("*")) {
+                if (!st1.empty()) {
+                    if (array1[k].equals("+")) {
+                        result = st1.pop().add(st1.pop());
+                        st1.push(result);
+                    }
+                    if (array1[k].equals("*")) {
+                        result = st1.pop().multiply(st1.pop());
+                        st1.push(result);
+                    }
+                }
+            } else if (array1[k].equals("-") || array1[k].equals("/") || array1[k].equals("%")) {
+                if (!st1.empty()) {
+                    if (array1[k].equals("-")) {
+                        result = st1.pop();
+                        result = st1.pop().subtract(result);
+                        st1.push(result);
+                    } else if (array1[k].equals("/")) {
+                        result = st1.pop();
+                        result = st1.pop().divide(result);
+                        st1.push(result);
+                    } else {
+                        result = st1.pop();
+                        result = st1.pop().remainder(result);
+                        st1.push(result);
+                    }
+                }
+            } else {
+                BigDecimal b = new BigDecimal(array1[k]);
+                st1.push(b);
+            }
+            if (k == array1.length - 1) {
+                result = st1.pop();
+            }
+        }
+        return result;
+    }
+}
+public class Main {
+
+    public static void main(String[] args) {
+        String str;
+        Scanner cin = new Scanner(System.in);
+        str = cin.next();
+        exp ex = new exp();
+        BigDecimal ans = ex.resultExpression(str);
+        System.out.printf("%.2f\n",ans);
+    }
+}
