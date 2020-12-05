@@ -1,0 +1,95 @@
+import java.util.ArrayList;
+import java.util.Scanner;
+
+public class Main {
+
+    public static void main(String[] args) {
+        Scanner cin = new Scanner(System.in);
+        String str = cin.next();
+        int temp, size;
+        temp = 0;
+        size = cin.nextInt();
+        if (str.equals("Integer")) {
+            ArrayList<Integer> list = new ArrayList<>();
+            int number, number1;
+            for (int i = 0; i < size; i++) {
+                number = cin.nextInt();
+                list.add(number);
+            }
+            number1 = cin.nextInt();
+            for (int i = 0; i < list.size(); i++) {
+                if (number1 == list.get(i)) {
+                    temp = i + 1;
+                }
+            }
+            if (temp != 0) {
+                System.out.println(number1 + " is found in the " + temp + "'th place.");
+            } 
+            else {
+                System.out.println("Not found");
+            }
+        }
+        if (str.equals("Character")) {
+            ArrayList<Character> list = new ArrayList<>();
+            String ch, ch1;
+            for (int i = 0; i < size; i++) {
+                ch = cin.next();
+                list.add(ch.charAt(0));
+            }
+            ch1 = cin.next();
+            for (int i = 0; i < list.size(); i++) {
+                if (list.get(i).equals(ch1.charAt(0))) {
+                    temp = i + 1;
+                }
+            }
+            if (temp != 0) {
+                System.out.println(ch1 + " is found in the " + temp + "'th place.");
+            } 
+            else {
+                System.out.println("Not found");
+            }
+        }
+        if (str.equals("String")) {
+            ArrayList<String> list = new ArrayList<>();
+            String st, st1;
+            for (int i = 0; i < size; i++) {
+                st = cin.next();
+                list.add(st);
+            }
+            st1 = cin.next();
+            for (int i = 0; i < list.size() - 1; i++) {
+                if (list.get(i).equals(st1)) {
+                    temp = i + 1;
+                }
+            }
+            if (temp != 0) {
+                System.out.println(st1 + " is found in the " + temp + "'th place.");
+            }
+            else {
+                System.out.println("Not found");
+            }
+        }
+        if (str.equals("Double")) {
+            double num, num1;
+            ArrayList<Double> list = new ArrayList<>();
+            for (int i = 0; i < size; i++) {
+                num = cin.nextDouble();
+                list.add(num);
+            }
+            num1 = cin.nextDouble();
+            for (int i = 0; i < list.size() - 1; i++) {
+                if (num1 == list.get(i)) {
+                    temp = i + 1;
+                }
+            }
+            if (temp != 0) {
+                System.out.printf("%.3f is found in the %d", num1, temp);
+                System.out.println("'th place.");
+            } 
+            else {
+                System.out.println("Not found");
+            }
+
+        }
+    }
+}
