@@ -1,0 +1,66 @@
+import java.util.ArrayList;  
+import java.util.Scanner;  
+  
+public class Main {  
+  
+    public static void main(String[] args) {  
+        Scanner cin = new Scanner(System.in);  
+        String str = cin.next();  
+        if (str.equals("Integer")) {  
+            ArrayList<Integer> list = new ArrayList<>();  
+            while (cin.hasNextInt()) {  
+                int number;  
+                number = cin.nextInt();  
+                if (!list.contains(number)) {  
+                    list.add(number);  
+                }  
+            }  
+            for (int i = 0; i < list.size() - 1; i++) {  
+                System.out.print(list.get(i) + " ");  
+            }  
+            System.out.println(list.get(list.size() - 1));  
+        }  
+        if (str.equals("Character")) {  
+            ArrayList<Character> list = new ArrayList<>();  
+            while (cin.hasNext()) {  
+                String ch;  
+                ch = cin.next();  
+                if (!list.contains(ch.charAt(0))) {  
+                    list.add(ch.charAt(0));  
+                }  
+            }  
+            for (int i = 0; i < list.size() - 1; i++) {  
+                System.out.print(list.get(i) + " ");  
+            }  
+            System.out.println(list.get(list.size() - 1));  
+        }  
+        if (str.equals("String")) {  
+            ArrayList<String> list = new ArrayList<>();  
+            while (cin.hasNext()) {  
+                String st;  
+                st = cin.next();  
+                if (!list.contains(st)) {  
+                    list.add(st);  
+                }  
+            }  
+            for (int i = 0; i < list.size() - 1; i++) {  
+                System.out.print(list.get(i) + " ");  
+            }  
+            System.out.println(list.get(list.size() - 1));  
+        }  
+        if (str.equals("Double")) {  
+            ArrayList<Double> list = new ArrayList<>();  
+            while (cin.hasNextDouble()) {  
+                double num;  
+                num = cin.nextDouble();  
+                if (!list.contains(num)) {  
+                    list.add(num);  
+                }  
+            }  
+            for (int i = 0; i < list.size() - 1; i++) {  
+                System.out.printf("%.3f ", list.get(i));  
+            }  
+            System.out.printf("%.3f\n", list.get(list.size() - 1));  
+        }  
+    }  
+}
