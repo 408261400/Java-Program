@@ -1,0 +1,32 @@
+import java.util.Scanner;
+
+public class Main {
+
+    public static void main(String[] args) {
+        Scanner cin = new Scanner(System.in);
+        int odd, even;
+        String str;
+        while (cin.hasNext()) {
+            str = cin.nextLine();
+            odd = 0;
+            even = 0;
+            if (str.charAt(0) - 48 == 0) {
+                break;
+            } 
+            else {
+                for (int i = str.length() - 1; i >= 0; i = i - 2) {
+                    odd = odd + (str.charAt(i) - 48);
+                }
+                for (int i = str.length() - 2; i >= 0; i = i - 2) {
+                    even = even + (str.charAt(i) - 48);
+                }
+                if ((odd - even) % 11 == 0) {
+                    System.out.println(str + " is a multiple of 11.");
+                } 
+                else {
+                    System.out.println(str + " is not a multiple of 11.");
+                }
+            }
+        }
+    }
+}
