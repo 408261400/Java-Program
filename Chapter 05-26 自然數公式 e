@@ -1,0 +1,27 @@
+import java.util.Scanner;
+
+public class Main {
+
+    public static void main(String[] args) {
+        int number, num;
+        double e, temp;
+        temp = 1;
+        e = 1;
+        Scanner cin = new Scanner(System.in);
+        number = cin.nextInt();
+        num = number;
+        Double[] v = new Double[number];
+        for (int k = 0; k < number; k++) {
+            for (int i = 1; i <= num; i++) {
+                temp = temp * i;
+            }
+            v[k] = temp;
+            temp = 1;
+            num--;
+        }
+        for (int k = 0; k < number; k++) {
+            e = e + 1 / v[k];
+        }
+        System.out.println(e);
+    }
+}
