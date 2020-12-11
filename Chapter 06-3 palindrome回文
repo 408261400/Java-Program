@@ -1,0 +1,48 @@
+import java.util.Scanner;
+
+public class Main {
+    public static int reverse(int number) {
+        String str;
+        int p;
+        p = 1;
+        str = "" + number;
+        StringBuffer b = new StringBuffer(str);
+        b.reverse();
+        number = 0;
+        for (int i = b.length() - 1; i >= 0; i--) {
+            number = number + (b.charAt(i) - 48) * p;
+            p = p * 10;
+        }
+        return number;
+    }
+    public static boolean isPalindrome(int number) {
+        String str;
+        str = "" + number;
+        StringBuffer b = new StringBuffer(str);
+        b.reverse();
+        int count;
+        count = 0;
+        for (int k = 0; k < b.length(); k++) {
+            if (b.charAt(k) - 48 == str.charAt(k) - 48) {
+                count++;
+            }
+        }
+        if (count == b.length()) {
+            return true;
+        } 
+        else {
+            return false;
+        }
+    }
+    public static void main(String[] args) {
+        int number;
+        Scanner cin = new Scanner(System.in);
+        number = cin.nextInt();
+        if (isPalindrome(reverse(number))) {
+            System.out.println(number + " is palindrome");
+        } 
+        else {
+            System.out.println(number + " is not palindrome");
+        }
+    }
+}
