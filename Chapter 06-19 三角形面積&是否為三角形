@@ -1,0 +1,40 @@
+import java.util.Scanner;
+
+public class Main {
+    public static boolean isValid(double side1,double side2,double side3) {
+        double max, s;
+        max = side1;
+        s = side1 + side2 + side3;
+        if (max < side2 && side2 > side3) {
+            max = side2;
+        }
+        if (side3 > max && side3 > side2) {
+            max = side3;
+        }
+        if (max < s - max) {
+            return true;
+        }
+        else {
+            return false;
+        }
+    }
+    public static double are(double side1,double side2,double side3) {
+        double s, ans;
+        s = (side1 + side2 + side3) / 2;
+        ans = Math.pow(s * (s - side1) * (s - side2) * (s - side3), 0.5);
+        return ans;
+    }
+    public static void main(String[] args) {
+        Scanner cin = new Scanner(System.in);
+        double a, b, c;
+        a = cin.nextDouble();
+        b = cin.nextDouble();
+        c = cin.nextDouble();
+        if (isValid(a, b, c) == true) {
+            System.out.println("The are of the triangle is " + are(a, b, c));
+        }
+        else {
+            System.out.println("Input is invalid");
+        }
+    }
+}
