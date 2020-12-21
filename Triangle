@@ -1,0 +1,55 @@
+import java.awt.geom.Point2D;  
+import java.util.Scanner;  
+  
+class Point{  
+    public static void dis(double x1,double y1,double x2,double y2,double x3,double y3) {  
+        double A = Point2D.distance(x1, y1, x2, y2);  
+        double B = Point2D.distance(x2, y2, x3, y3);  
+        double C = Point2D.distance(x1, y1, x3, y3);  
+        Triangle.isValid(A, B, C);  
+    }  
+}  
+class Triangle{  
+    public static void isValid(double a , double b,double c) {  
+        double max = a;  
+        double min = a;  
+        double s = a + b + c;  
+        if (max < b && b > c) {  
+            max = b;  
+        }  
+        if (max < c && c > b) {  
+            max = c;  
+        }  
+        if (min > b && b < c) {  
+            min = b;  
+        }  
+        if (min > c && b > c) {  
+            min = c;  
+        }  
+        if (max < s - max) {  
+            System.out.printf("%.3f %.3f %.3f ", min, s - min - max, max);  
+            s = s / 2;  
+            System.out.printf("%.3f\n", Math.pow(s * (s - a) * (s - b) * (s - c), 0.5));  
+        }   
+        else {  
+            System.out.println("Just Line!");  
+        }  
+    }  
+}  
+public class Main {  
+    public static void main(String[] args) {  
+        Scanner cin = new Scanner(System.in);  
+        int time;  
+        time = cin.nextInt();  
+        for (int i = 0; i < time; i++) {  
+            double x1, y1, x2, y2, x3, y3;  
+            x1 = cin.nextDouble();  
+            y1 = cin.nextDouble();  
+            x2 = cin.nextDouble();  
+            y2 = cin.nextDouble();  
+            x3 = cin.nextDouble();  
+            y3 = cin.nextDouble();  
+            Point.dis(x1, y1, x2, y2, x3, y3);  
+        }  
+    }  
+}
